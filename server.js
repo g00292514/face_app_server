@@ -9,7 +9,7 @@ const signIn = require('./controllers/signIn');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
-const pgres = knex({
+const db = knex({
 	client: 'pg',
 	connection: {
 		connectionString: process.env.DATEBASE_URL,
@@ -24,10 +24,10 @@ app.use(cors());
 
 
 app.get('/', (req, res) => {res.send('it is running') })
-app.post('/signin', (req, res) => { signIn.handleSignIn(req, res, pgres, bcrypt)});
-app.post('/register', (req, res) => { register.handleRegister(req, res, pgres, bcrypt)});
-app.get('/profile/:id', (req , res) => { profile.handleProfileGet(req, res, pgres)});
-app.put('/image', (req, res) => { image.handleImage(req, res, pgres)});
+app.post('/signin', (req, res) => { signIn.handleSignIn(req, res, db, bcrypt)});
+app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt)});
+app.get('/profile/:id', (req , res) => { profile.handleProfileGet(req, res, db)});
+app.put('/image', (req, res) => { image.handleImage(req, res, db)});
 app.post('/imageurl', (req, res) => { image.handleAPICall(req, res)});
 
 app.listen(process.env.PORT || 3000, () => {
