@@ -23,7 +23,7 @@
             joined: new Date()
           })
           .then(user => {
-            console.log(res.json(user[0]);)
+            console.log(res.json(user[0]));
             res.json(user[0]);
           })
       })
